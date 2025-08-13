@@ -34,7 +34,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
       {error && <p>Ha orrido un error</p>}
 
       {results && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           <h2 className="text-h6">{titleList}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 ">
             {results.map((item: any) => (
