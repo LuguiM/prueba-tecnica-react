@@ -46,3 +46,11 @@ body {
 .section-spacing {
     @apply w-full max-w-screen-xl mx-auto px-[3rem] md:px-[7rem] py-4;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
