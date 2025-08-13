@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setSearchActive, setIsLoading, setMovies } from "../store";
+import { setSearchActive, setIsLoading, setMovies, setSeries } from "../store";
 import moviesSeriesServices from "../services/moviesSeries.services";
 
 export const useMoviesdbStore = () => {
@@ -23,6 +23,24 @@ export const useMoviesdbStore = () => {
         }
     }
 
+    const startLoadPopularMovies = async (query?: Object) => {
+        try {
+            const data = await moviesSeriesServices.getPopularMovies(query);
+            dispatch(setMovies(data));
+        } catch (err) {
+            console.error("Error loading movies:", err);
+        }
+    }
+
+    const startLoadPopularSeries = async (query?: Object) => {
+        try {
+            const data = await moviesSeriesServices.getPopularSeries(query);
+            dispatch(setSeries(data));
+        } catch (err) {
+            console.error("Error loading movies:", err);
+        }
+    }
+
     return {
         movies,
         series,
@@ -36,5 +54,7 @@ export const useMoviesdbStore = () => {
         setActiveSearch,
         setLoading,
         startLoadMovies,
+        startLoadPopularMovies,
+        startLoadPopularSeries
     }
 }

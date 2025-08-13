@@ -13,7 +13,7 @@ const getPopularMovies = async (query?: Object) => {
 }
 
 const getPopularSeries = async (query?: Object) => {
-    return await network('GET', '/series/popular', query);
+    return await network('GET', '/tv/popular', query);
 }
 
 const getAllTrending = async (moment: String) => {
