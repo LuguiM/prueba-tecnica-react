@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useMoviesdbStore } from "../../hooks";
-import { Pagination } from "@mui/material";
+import { TextField } from "@mui/material";
 
-import { CardInfo, ListCards, MoviesCarousel } from "../../components";
+import { ListCards, MoviesCarousel } from "../../components";
 
 export const Home = () => {
   const {
@@ -32,18 +32,31 @@ export const Home = () => {
       <h1>Cine Archivo</h1>
 
       <div className="section-spacing space-y-8">
-        <MoviesCarousel title="Popular Movies" results={movies.results}></MoviesCarousel>
-        <MoviesCarousel title="Popular Series" results={series.results}></MoviesCarousel>
-        
-        <ListCards
-          titleList="Peliculas"
-          error={error}
-          loading={isLoading}
-          results={movies.results}
-          page={page}
-          total_pages={movies.total_pages}
-          onNewPage={onNewPage}
-        />
+        <div>
+          <TextField id="outlined-basic" label="Buscar pelicula o serie" color="primary" />
+        </div>
+
+        {!searchActive && (
+          <>
+            <MoviesCarousel
+              title="Popular Movies"
+              results={movies.results}
+            ></MoviesCarousel>
+            <MoviesCarousel
+              title="Popular Series"
+              results={series.results}
+            ></MoviesCarousel>
+            <ListCards
+              titleList="Peliculas"
+              error={error}
+              loading={isLoading}
+              results={movies.results}
+              page={page}
+              total_pages={movies.total_pages}
+              onNewPage={onNewPage}
+            />
+          </>
+        )}
       </div>
     </>
   );
