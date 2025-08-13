@@ -4,7 +4,7 @@ export default async function Config(
   query?: Record<string, any>,
   body?: Record<string, any>
 ) {
-  const app_url = import.meta.env.VITE_APP_URL;
+  const app_url = import.meta.env.VITE_API_URL;
   const api_key = import.meta.env.VITE_API_KEY;
 
   const params = new URLSearchParams({
