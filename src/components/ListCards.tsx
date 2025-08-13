@@ -36,7 +36,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
       {results && (
         <div className="flex flex-col gap-4">
           <h2 className="text-h6">{titleList}</h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-4 ">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 ">
             {results.map((item: any) => (
               <CardInfo
                 key={item.id}
