@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.container-main {
+    @apply flex flex-col gap-y-10 h-screen py-[1rem] text-blue-900 w-full max-w-screen-xl mx-auto px-[3rem] md:px-[7rem];
+}
