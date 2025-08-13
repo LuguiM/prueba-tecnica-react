@@ -4,8 +4,10 @@
 @theme {
 
     /* Colors */
-    --blue-fondo: #0f182a;
-    --white-text: #e7e8e7;
+    --color-blue-fondo: #0f182a;
+    --color-white: #e7e8e7;
+
+    /* --bg-blue-fondo: #0f182a; */
 
     --text-h1: 4rem;
     /* 64px */
@@ -29,6 +31,18 @@
     /* 16px */
 }
 
+body {
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-blue-fondo);
+}
+
 .container-main {
-    @apply flex flex-col gap-y-10 h-screen py-[1rem] text-blue-900 w-full max-w-screen-xl mx-auto px-[3rem] md:px-[7rem];
+    @apply flex flex-col gap-y-10 h-screen py-[1rem] text-white;
+}
+
+.section-spacing {
+    @apply w-full max-w-screen-xl mx-auto px-[3rem] md:px-[7rem] py-4;
 }

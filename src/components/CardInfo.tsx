@@ -1,25 +1,28 @@
-import { Card, CardMedia, CardContent } from '@mui/material';
-
 interface CardInfoProps {
-    image?: string;
-    title?: string;
-    gender?: string;
-    year?: string;
+  image?: string;
+  title?: string;
+  gender?: string;
+  year?: string;
 }
 
-export const CardInfo: React.FC<CardInfoProps> = ({ image, title, gender, year }) => {
-    return (
-        <Card>
-            <CardMedia
-                component="img"
-                height="300"
-                image={image}
-                alt={title}
-            />
-            <CardContent>
-                <h2>{title}</h2>
-                <p>{year}-{gender}</p>
-            </CardContent>
-        </Card>
-    )
-}
+export const CardInfo: React.FC<CardInfoProps> = ({
+  image,
+  title,
+  gender,
+  year,
+}) => {
+
+    const formatYear = year ? year.slice(0,4) : ""
+
+  return (
+    <div className="flex flex-col justify-center border">
+      <img src={image} alt={title} className="h-100 object-cover" />
+      <div className="p-2">
+        <h2 className="text-bodyLarge font-bold">{title}</h2>
+        <p>
+          {formatYear}-{gender}
+        </p>
+      </div>
+    </div>
+  );
+};
