@@ -19,8 +19,8 @@ export default async function Config(method: string, url: string, body = {}) {
 
     try{
 
-        const api = await fetch(`${app_url}${url}?api_key=${api_key}`, config())
-        
+        const api = await fetch(`${app_url}${url}?api_key=${api_key}&language=es-ES`, config())
+
         if (!api.ok) { 
             throw new Error(`HTTP error! Status: ${api.status}`);
         }
