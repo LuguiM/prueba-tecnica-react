@@ -1,11 +1,19 @@
 import network from './network.services';
 
-const getPopularMovies = async () => {
-    return await network('GET', '/movie/popular');
+const getMovies = async (query?: Object) => {
+    return await network('GET', '/discover/movie', query);
 }
 
-const getPopularSeries = async () => {
-    return await network('GET', '/series/popular');
+const getSeriesTv = async (query?: Object) => {
+    return await network('GET', '/discover/tv', query);
+}
+
+const getPopularMovies = async (query?: Object) => {
+    return await network('GET', '/movie/popular', query);
+}
+
+const getPopularSeries = async (query?: Object) => {
+    return await network('GET', '/series/popular', query);
 }
 
 const getAllTrending = async (moment: String) => {
@@ -17,6 +25,8 @@ const searchMoviesSeries = async (query: Object) => {
 }
 
 export default {
+    getMovies,
+    getSeriesTv,
     getPopularMovies,
     getPopularSeries,
     getAllTrending,

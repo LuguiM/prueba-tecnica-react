@@ -10,6 +10,7 @@ export default async function Config(
   const params = new URLSearchParams({
     api_key,
     language: "es-ES",
+    include_adult: "false",
     ...(query || {}),
   });
 
