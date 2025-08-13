@@ -3,6 +3,7 @@ interface CardInfoProps {
   title?: string;
   gender?: string;
   year?: string;
+  size?: "small" | "large";
 }
 
 export const CardInfo: React.FC<CardInfoProps> = ({
@@ -10,19 +11,24 @@ export const CardInfo: React.FC<CardInfoProps> = ({
   title,
   gender,
   year,
+  size = "small",
 }) => {
-
-    const formatYear = year ? year.slice(0,4) : ""
+  const formatYear = year ? year.slice(0, 4) : "";
 
   return (
-    <div className="flex flex-col justify-center border">
-      <img src={image} alt={title} className="h-100 object-cover" />
-      <div className="p-2">
-        <h2 className="text-bodyLarge font-bold">{title}</h2>
-        <p>
-          {formatYear}-{gender}
-        </p>
+    <div className={size === 'large' ? 'flex flex-col' : 'flex-shrink-0 w-40'}>
+      <div className="aspect-[2/3] w-full overflow-hidden rounded-lg">
+        <img
+          src={`https://image.tmdb.org/t/p/w500${image}`}
+          alt={title}
+          className="w-full h-full object-cover block"
+        />
       </div>
+
+      <h2 className="mt-2 font-semibold truncate">{title}</h2>
+      <p className="text-sm text-gray-400">
+        {formatYear}-{gender}
+      </p>
     </div>
   );
 };
