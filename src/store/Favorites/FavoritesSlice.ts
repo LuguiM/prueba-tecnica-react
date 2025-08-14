@@ -6,14 +6,16 @@ interface FavoritesState {
     isFavoritesLoad: boolean;
 }
 
-const initialState: FavoritesState = {
-    favorites: [],
-    isFavoritesLoad: false,
+const storedFavorites = localStorage.getItem("favorites");
+const initialFavorites: FavoritesState = {
+    favorites: storedFavorites ? JSON.parse(storedFavorites) : [],
+    isFavoritesLoad: storedFavorites ? JSON.parse(storedFavorites).length > 0 : false,
 };
+
 
 export const favoritesSlice = createSlice({
     name: "favorites",
-    initialState,
+    initialState: initialFavorites,
     reducers: {
         addFavorite: (state, { payload }: PayloadAction<Record<string, unknown>>) => {
             state.isFavoritesLoad = true;
