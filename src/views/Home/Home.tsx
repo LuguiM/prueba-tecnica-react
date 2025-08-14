@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useMoviesdbStore } from "../../hooks";
 import { ListCards, MoviesCarousel } from "../../components";
 import { HeaderSection } from "./sections";
-import { Button, TextField, Select, MenuItem } from "@mui/material"
+import { Button, TextField} from "@mui/material"
 
 export const Home = () => {
     const {
@@ -20,16 +20,16 @@ export const Home = () => {
     } = useMoviesdbStore();
 
     const [page, setPage] = useState(movies.page || 1);
-    const [topic, setTopic] = useState("day");
+    const [topic] = useState("day");
     const [searchQuery, setSearchQuery] = useState("");
-    const [genres, setGenres] = useState([]);
-    const [year, setYear] = useState(0);
+    const [genres] = useState([]);
+    const [year] = useState(0);
     const [searchParams, setSearchParams] = useState({
         query: { query: "", page: 1 },
         genres: [],
         year: 0,
     });
-    const [age, setAge] = useState("");
+    // const [age, setAge] = useState("");
     const handleSearch = () => {
         const params = {
             query: { query: searchQuery, page: 1 }, // siempre empieza en página 1
@@ -41,9 +41,9 @@ export const Home = () => {
         setSearchParams(params);
 
     };
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setAge(event.target.value as string);
-    };
+    // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    //     setAge(event.target.value as string);
+    // };
 
     const onNewPage = (_event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
@@ -82,7 +82,7 @@ export const Home = () => {
                 />
                 {searchActive && (
                     <>
-                        <Select
+                        {/* <Select
                             value={age}
                             onChange={handleChange}
                             displayEmpty
@@ -94,7 +94,7 @@ export const Home = () => {
                             <MenuItem value={10}>Ten</MenuItem>
                             <MenuItem value={20}>Twenty</MenuItem>
                             <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
+                        </Select> */}
                         <Button
                             variant="outlined"
                             className="rounded-lg"
