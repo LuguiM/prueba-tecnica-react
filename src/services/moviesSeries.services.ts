@@ -24,11 +24,21 @@ const searchMoviesSeries = async (query: Object) => {
     return await network('GET', '/search/multi', query)
 }
 
+const detailsMovie = async (id: string) => {
+    return await network('GET', `/movie/${id}`);
+}
+
+const detailsTv = async (id: string) => {
+    return await network('GET', `/tv/${id}`);
+}
+
 export default {
     getMovies,
     getSeriesTv,
     getPopularMovies,
     getPopularSeries,
     getAllTrending,
-    searchMoviesSeries
+    searchMoviesSeries,
+    detailsMovie,
+    detailsTv
 }

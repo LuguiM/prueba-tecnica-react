@@ -50,7 +50,7 @@ body {
 }
 
 .container-main {
-    @apply flex flex-col gap-y-10 h-screen py-[1rem] text-white;
+    @apply flex flex-col gap-y-10 h-screen pt-[1rem] text-white;
 }
 
 .section-spacing {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setMovies, setSeries, setTrending, setSearchResults } from "../store";
+import { setMovies, setSeries, setTrending, setSearchResults, cleanSearch } from "../store";
 import moviesSeriesServices from "../services/moviesSeries.services";
 
 export const useMoviesdbStore = () => {
@@ -64,6 +64,10 @@ export const useMoviesdbStore = () => {
         }
     }
 
+    const cleanSearchResults = () => {
+        dispatch(cleanSearch());
+    }
+
     return {
         movies,
         series,
@@ -78,6 +82,7 @@ export const useMoviesdbStore = () => {
         startLoadPopularMovies,
         startLoadPopularSeries,
         loadTrending,
-        fetchSearchResults
+        fetchSearchResults,
+        cleanSearchResults
     }
 }
