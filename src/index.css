@@ -6,7 +6,7 @@
     /* Colors */
     --color-blue-fondo: #0f182a;
     --color-white: #e7e8e7;
-    --color-blue-light: #035b78;
+    --color-blue-light: #035b;
 
     /* --bg-blue-fondo: #0f182a; */
 
@@ -59,7 +59,7 @@ body {
 
 
 /* Components */
-.MuiButtonBase-root,
+
 .MuiPaginationItem-root {
     color: var(--color-white) !important;
 }
