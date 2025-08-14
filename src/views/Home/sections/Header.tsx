@@ -1,7 +1,3 @@
-import React, { useState } from "react";
-import { Button, TextField, Select, MenuItem } from "@mui/material"
-import { useMoviesdbStore } from "../../../hooks";
-
 interface HeaderSectionProps {
     children: React.ReactNode;
 }
