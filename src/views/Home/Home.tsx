@@ -89,23 +89,24 @@ export const Home = () => {
   return (
     <>
       <HeaderSection>
-        
         <div className="w-full relative">
-          <TextField
-            fullWidth
-            placeholder="Buscar película o serie"
-            className="bg-white rounded-lg"
-            value={searchQuery}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setSearchQuery(event.target.value);
-              if (inputError) setInputError(false);
-            }}
-          />
-          {inputError && (
-            <p className="text-red-500 text-sm mt-1">
-              El campo de búsqueda no puede estar vacío
-            </p>
-          )}
+          <div>
+            <TextField
+              fullWidth
+              placeholder="Buscar película o serie"
+              className="bg-white rounded-lg"
+              value={searchQuery}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setSearchQuery(event.target.value);
+                if (inputError) setInputError(false);
+              }}
+            />
+            {inputError && (
+              <p className="text-red-500 text-sm mt-1">
+                El campo de búsqueda no puede estar vacío
+              </p>
+            )}
+          </div>
         </div>
 
         {searchActive && (
