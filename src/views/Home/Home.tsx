@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import { useMoviesdbStore } from "../../hooks";
 import { ListCards } from "../../components";
 import { HeaderSection, CarrouselSection } from "./sections";
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 export const Home = () => {
   const {
     movies,
+    genres, // géneros vienen del store
     searchActive,
     searchResults,
     isLoading,
@@ -17,22 +25,29 @@ export const Home = () => {
 
   const [page, setPage] = useState(movies.page || 1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [genres] = useState([]);
-  const [year] = useState(0);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+  const [year, setYear] = useState<number | "">("");
   const [searchParams, setSearchParams] = useState({
     query: { query: "", page: 1 },
-    genres: [],
+    genres: [] as number[],
     year: 0,
   });
-  // const [age, setAge] = useState("");
+  const [inputError, setInputError] = useState(false);
+
   const handleSearch = () => {
+    if (!searchQuery.trim()) {
+      setInputError(true);
+      return;
+    }
+    setInputError(false);
+
     const params = {
-      query: { query: searchQuery, page: 1 }, // siempre empieza en página 1
-      genres: genres,
-      year: year,
+      query: { query: searchQuery, page: 1 },
+      genres: selectedGenres,
+      year: year ? Number(year) : 0,
     };
 
-    setPage(1); // resetear paginación
+    setPage(1);
     setSearchParams(params);
   };
 
@@ -43,13 +58,12 @@ export const Home = () => {
       year: 0,
     });
     setSearchQuery("");
+    setSelectedGenres([]);
+    setYear("");
     setPage(1);
+    setInputError(false);
     cleanSearchResults();
   };
-
-  // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-  //     setAge(event.target.value as string);
-  // };
 
   const onNewPage = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -75,50 +89,79 @@ export const Home = () => {
   return (
     <>
       <HeaderSection>
-        <TextField
-          fullWidth
-          placeholder="Buscar pelicula o serie"
-          className="bg-white rounded-lg"
-          value={searchQuery}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchQuery(event.target.value)
-          }
-        />
+        
+        <div className="w-full relative">
+          <TextField
+            fullWidth
+            placeholder="Buscar película o serie"
+            className="bg-white rounded-lg"
+            value={searchQuery}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setSearchQuery(event.target.value);
+              if (inputError) setInputError(false);
+            }}
+          />
+          {inputError && (
+            <p className="text-red-500 text-sm mt-1">
+              El campo de búsqueda no puede estar vacío
+            </p>
+          )}
+        </div>
+
         {searchActive && (
           <>
-            {/* <Select
-                            value={age}
-                            onChange={handleChange}
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                        </Select> */}
-            <Button variant="outlined" className="rounded-lg" onClick={clean}>
+            {/* Select de géneros dinámico */}
+            <FormControl fullWidth className="bg-white rounded-lg mt-2">
+              <InputLabel id="genre-select-label">Género</InputLabel>
+              <Select
+                labelId="genre-select-label"
+                multiple
+                value={selectedGenres}
+                onChange={(e) => setSelectedGenres(e.target.value as number[])}
+              >
+                {genres.map((genre: any) => (
+                  <MenuItem key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <TextField
+              fullWidth
+              type="number"
+              placeholder="Año"
+              className="bg-white rounded-lg mt-2"
+              value={year}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setYear(e.target.value ? Number(e.target.value) : "")
+              }
+            />
+
+            <Button
+              variant="contained"
+              className="rounded-lg mt-2"
+              onClick={clean}
+            >
               Limpiar
             </Button>
           </>
         )}
+
         <Button
           variant="contained"
-          className="rounded-lg"
+          className="rounded-lg mt-2"
           onClick={handleSearch}
         >
           Buscar
         </Button>
       </HeaderSection>
+
       <div className="section-spacing space-y-8">
         {!searchActive ? (
           <CarrouselSection />
         ) : searchResults.results.length === 0 ? (
-          <p className="text-center text-white">
-            No se encontraron resultados
-          </p>
+          <p className="text-center text-white">No se encontraron resultados</p>
         ) : (
           <ListCards
             titleList="Resultados de la búsqueda"

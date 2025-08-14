@@ -51,7 +51,7 @@ export const MoviesCarousel = ({ results, title, type }: MoviesCarouselProps) =>
               key={item.id}
               id={item.id}
               image={item.poster_path}
-              gender="d"
+              gender={item.genre_ids}
               title={item.name || item.original_title}
               year={item.first_air_date || item.release_date}
               size="small"

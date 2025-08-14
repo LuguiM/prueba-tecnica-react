@@ -2,31 +2,33 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { Snackbar, Alert } from "@mui/material";
 import type { SnackbarCloseReason } from "@mui/material";
-
-import { useFavoritesStore } from "../hooks";
+import { getGenresNames } from "../helpers";
+import { useFavoritesStore, useMoviesdbStore } from "../hooks";
 
 interface CardInfoProps {
   id?: number;
   image?: string;
   title?: string;
-  gender?: string;
+  gender?: number[] | { id: number; name: string }[];
   year?: string;
   size?: "small" | "large";
   item?: Record<string, unknown>;
-  type?: "movie" | "tv";
+  type?: "movie" | "tv" | "unknown";
 }
 
 export const CardInfo: React.FC<CardInfoProps> = ({
   id,
   image,
   title,
-  gender,
+  gender = [],
   year,
   size = "small",
   item = {},
   type = "movie",
 }) => {
   const { favorites, startAddFavorite, deleteFavorite } = useFavoritesStore();
+  const { genres } = useMoviesdbStore();
+  const genresString = getGenresNames(genres, gender);
 
   const isFavorite = favorites.some((fav: any) => fav.id === id);
 
@@ -52,13 +54,13 @@ export const CardInfo: React.FC<CardInfoProps> = ({
     setOpenSnackbar(true);
   };
 
-const handleCloseSnackbar = (
-  _event: React.SyntheticEvent<any> | Event,
-  reason?: SnackbarCloseReason
-) => {
-  if (reason === "clickaway") return;
-  setOpenSnackbar(false);
-};
+  const handleCloseSnackbar = (
+    _event: React.SyntheticEvent<any> | Event,
+    reason?: SnackbarCloseReason
+  ) => {
+    if (reason === "clickaway") return;
+    setOpenSnackbar(false);
+  };
 
   return (
     <div
@@ -89,7 +91,7 @@ const handleCloseSnackbar = (
 
       <h2 className="mt-2 font-semibold truncate">{title}</h2>
       <p className="text-sm text-gray-400">
-        {year?.slice(0, 4)} - {gender}
+        {year?.slice(0, 4)} - {genresString}
       </p>
 
       <Snackbar

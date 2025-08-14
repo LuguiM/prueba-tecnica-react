@@ -9,7 +9,6 @@ interface ListCardsProps {
   results?: Array<any>;
   total_pages?: number;
   page?: number;
-  type?: "movie" | "tv";
   onNewPage?: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
@@ -21,9 +20,16 @@ export const ListCards: React.FC<ListCardsProps> = ({
   total_pages = 0,
   page = 1,
   onNewPage,
-  type = "movie",
 }) => {
   const [totalPage, setTotalPage] = useState<number>(total_pages);
+
+  const getMediaType = (item: any): "movie" | "tv" | "unknown" | undefined => {
+    if (item.media_type === "movie" || item.media_type === "tv")
+      return item.media_type;
+    if (item.title || item.release_date) return "movie";
+    if (item.name || item.first_air_date) return "tv";
+    return "unknown";
+  };
 
   useEffect(() => {
     setTotalPage(total_pages >= 500 ? 500 : total_pages);
@@ -44,12 +50,12 @@ export const ListCards: React.FC<ListCardsProps> = ({
                 key={item.id}
                 id={item.id}
                 image={item.poster_path}
-                gender="d"
+                gender={item.genre_ids}
                 title={item.name || item.original_title}
                 year={item.first_air_date || item.release_date}
                 size="large"
                 item={item}
-                type={item.media_type || type}
+                type={getMediaType(item)}
               />
             ))}
           </div>
