@@ -12,6 +12,7 @@ export const Home = () => {
     isLoading,
     error,
     fetchSearchResults,
+    cleanSearchResults
   } = useMoviesdbStore();
 
   const [page, setPage] = useState(movies.page || 1);
@@ -34,6 +35,18 @@ export const Home = () => {
     setPage(1); // resetear paginación
     setSearchParams(params);
   };
+
+  const clean = () => {
+    setSearchParams({
+      query: { query: "", page: 1 },
+      genres: [],
+      year: 0,
+    });
+    setSearchQuery("");
+    setPage(1);
+    cleanSearchResults();
+  }
+
   // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
   //     setAge(event.target.value as string);
   // };
@@ -86,7 +99,7 @@ export const Home = () => {
                             <MenuItem value={20}>Twenty</MenuItem>
                             <MenuItem value={30}>Thirty</MenuItem>
                         </Select> */}
-            <Button variant="outlined" className="rounded-lg">
+            <Button variant="outlined" className="rounded-lg" onClick={clean}>
               Limpiar
             </Button>
           </>
