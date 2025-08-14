@@ -22,13 +22,11 @@ export const moviesSerieSlice = createSlice({
             state.series = payload;
         },
         setSearchResults: (state, { payload }) => {
+            state.searchActive = true;
             state.searchResults = payload;
         },
         setTrending: (state, { payload }) => {
             state.trending = payload;
-        },
-        setSearchActive: (state, { payload }) => {
-            state.searchActive = payload;
         },
         setIsLoading: (state, { payload }) => {
             state.isLoading = payload;
@@ -38,6 +36,10 @@ export const moviesSerieSlice = createSlice({
         },
         setGenres: (state, { payload }) => {
             state.genres = payload;
+        },
+        cleanSearch: (state) => {
+            state.searchActive = false;
+            state.searchResults = [];
         }
     }
 });
@@ -47,7 +49,7 @@ export const {
     setSeries,
     setSearchResults,
     setTrending,
-    setSearchActive,
+    cleanSearch,
     setIsLoading,
     setError,
     setGenres

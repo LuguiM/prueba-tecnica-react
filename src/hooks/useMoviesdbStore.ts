@@ -1,18 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setSearchActive, setIsLoading, setMovies, setSeries } from "../store";
+import { setMovies, setSeries, setTrending, setSearchResults } from "../store";
 import moviesSeriesServices from "../services/moviesSeries.services";
 
 export const useMoviesdbStore = () => {
     const dispatch = useDispatch();
     const { movies, series, trending, searchResults, searchActive, isLoading, error } = useSelector((state: any) => state.moviesSeries);
-
-    const setActiveSearch = (active: boolean) => {
-        dispatch(setSearchActive(active));
-    }
-
-    const setLoading = (loading: boolean) => {
-        dispatch(setIsLoading(loading));
-    }
 
     const startLoadMovies = async (query?: Object) => {
         try {
@@ -41,6 +33,37 @@ export const useMoviesdbStore = () => {
         }
     }
 
+    const loadTrending = async (moment: String) => {
+        try {
+            const data = await moviesSeriesServices.getAllTrending(moment);
+            dispatch(setTrending(data))
+
+        } catch (err) {
+            console.error("Error loading trending:", err);
+        }
+    }
+
+    const fetchSearchResults = async ( query: Object, genre: Array<number>, year: Number ) => {
+        try {
+            const genresArray = Array.isArray(genre) ? genre : genre ? [genre] : [];
+            const data = await moviesSeriesServices.searchMoviesSeries(query);
+            const filteredResults = data.results.filter((item:any) => {
+            const yearToCheck = item.media_type === "movie"
+                ? item.release_date
+                : item.first_air_date;
+
+            const releaseYear = yearToCheck ? parseInt(yearToCheck.split("-")[0]) : null;
+
+            return (!year || releaseYear === year) &&
+                   (!genresArray.length || genresArray.some(g => item.genre_ids.includes(g)));
+        });
+
+            dispatch(setSearchResults({ ...data, results: filteredResults }));
+        } catch (err) {
+            console.error("Error searching movies:", err);
+        }
+    }
+
     return {
         movies,
         series,
@@ -51,10 +74,10 @@ export const useMoviesdbStore = () => {
         error,
 
         // metodos
-        setActiveSearch,
-        setLoading,
         startLoadMovies,
         startLoadPopularMovies,
-        startLoadPopularSeries
+        startLoadPopularSeries,
+        loadTrending,
+        fetchSearchResults
     }
 }

@@ -3,62 +3,67 @@
 
 @theme {
 
-  /* Colors */
-  --color-blue-fondo: #0f182a;
-  --color-white: #e7e8e7;
+    /* Colors */
+    --color-blue-fondo: #0f182a;
+    --color-white: #e7e8e7;
+    --color-blue-light: #035b78;
 
-  /* --bg-blue-fondo: #0f182a; */
+    /* --bg-blue-fondo: #0f182a; */
 
-  --text-h1: 4rem;
-  /* 64px */
-  --text-h2: 3.5rem;
-  /* 56px */
-  --text-h3: 3rem;
-  /* 48px */
-  --text-h4: 2.5rem;
-  /* 40px */
-  --text-h5: 2rem;
-  /* 32px */
-  --text-h6: 1.5rem;
-  /* 24px */
-  --text-bodyLarge: 1.125rem;
-  /* 18px */
-  --text-bodyRegular: 1rem;
-  /* 16px */
-  --text-bodySmall: 0.875rem;
-  /* 14px */
-  --text-Paragraph: 1rem;
-  /* 16px */
+    --text-h1: 4rem;
+    /* 64px */
+    --text-h2: 3.5rem;
+    /* 56px */
+    --text-h3: 3rem;
+    /* 48px */
+    --text-h4: 2.5rem;
+    /* 40px */
+    --text-h5: 2rem;
+    /* 32px */
+    --text-h6: 1.5rem;
+    /* 24px */
+    --text-bodyLarge: 1.125rem;
+    /* 18px */
+    --text-bodyRegular: 1rem;
+    /* 16px */
+    --text-bodySmall: 0.875rem;
+    /* 14px */
+    --text-Paragraph: 1rem;
+    /* 16px */
 }
 
 body {
-  width: 100%;
-  height: fit-content;
-  margin: 0;
-  padding: 0;
-  background-color: var(--color-blue-fondo);
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-blue-fondo);
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .container-main {
-  @apply flex flex-col gap-y-10 h-screen py-[1rem] text-white;
+    @apply flex flex-col gap-y-10 h-screen py-[1rem] text-white;
 }
 
 .section-spacing {
-  @apply w-full max-w-screen-xl mx-auto px-[1rem] sm:px-[3rem] md:px-[7rem] py-4;
+    @apply w-full max-w-screen-xl mx-auto px-[1rem] sm:px-[3rem] md:px-[7rem] py-4;
 }
 
 
 /* Components */
 .MuiButtonBase-root,
 .MuiPaginationItem-root {
-  color: white !important;
+    color: var(--color-white) !important;
+}
+
+.css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: var(--color-blue-fondo) !important;
 }
