@@ -46,6 +46,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
                 title={item.name || item.original_title}
                 year={item.first_air_date || item.release_date}
                 size="large"
+                item={item}
               />
             ))}
           </div>

@@ -21,10 +21,13 @@ export const favoritesSlice = createSlice({
         },
         removeFavorite: (state, { payload }: PayloadAction<number>) => {
             state.favorites = state.favorites.filter(fav => fav.id !== payload);
+            if (state.favorites.length === 0) {
+                state.isFavoritesLoad = false;
+            }
         },
         removeAllFavorites: (state) => {
-            state.favorites = [];
             state.isFavoritesLoad = false;
+            state.favorites = [];
         }
     },
 });

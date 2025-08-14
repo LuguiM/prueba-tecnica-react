@@ -7,6 +7,7 @@ export const useFavoritesStore = () => {
 
 
     const startAddFavorite = (item: Record<string, unknown>) => {
+        if (item.length === 0 ) return;
         dispatch(addFavorite(item));
     }
 

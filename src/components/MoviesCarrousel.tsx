@@ -53,6 +53,7 @@ export const MoviesCarousel = ({ results, title }: MoviesCarouselProps) => {
               title={item.name || item.original_title}
               year={item.first_air_date || item.release_date}
               size="small"
+              item={item}
             />
           ))}
         </div>
