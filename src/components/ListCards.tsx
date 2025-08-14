@@ -9,6 +9,7 @@ interface ListCardsProps {
   results?: Array<any>;
   total_pages?: number;
   page?: number;
+  type?: "movie" | "tv";
   onNewPage?: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
@@ -20,6 +21,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
   total_pages = 0,
   page = 1,
   onNewPage,
+  type = "movie",
 }) => {
   const [totalPage, setTotalPage] = useState<number>(total_pages);
 
@@ -47,6 +49,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
                 year={item.first_air_date || item.release_date}
                 size="large"
                 item={item}
+                type={item.media_type || type}
               />
             ))}
           </div>

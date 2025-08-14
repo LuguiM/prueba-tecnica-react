@@ -29,10 +29,12 @@ export const CarrouselSection = () => {
       <MoviesCarousel
         title="Peliculas Populares"
         results={movies.results}
+        type="movie"
       ></MoviesCarousel>
       <MoviesCarousel
         title="Series Populares"
         results={series.results}
+        type="tv"
       ></MoviesCarousel>
     </>
   );

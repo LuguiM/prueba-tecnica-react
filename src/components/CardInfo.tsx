@@ -13,6 +13,7 @@ interface CardInfoProps {
   year?: string;
   size?: "small" | "large";
   item?: Record<string, unknown>;
+  type?: "movie" | "tv";
 }
 
 export const CardInfo: React.FC<CardInfoProps> = ({
@@ -23,6 +24,7 @@ export const CardInfo: React.FC<CardInfoProps> = ({
   year,
   size = "small",
   item = {},
+  type = "movie",
 }) => {
   const { favorites, startAddFavorite, deleteFavorite } = useFavoritesStore();
 
@@ -67,7 +69,7 @@ const handleCloseSnackbar = (
       } group relative`}
     >
       <Link
-        to={`details/${id}`}
+        to={`details/${type}/${id}`}
         className="block aspect-[2/3] w-full overflow-hidden rounded-lg relative group-hover:scale-105 transition-transform duration-300"
       >
         <img

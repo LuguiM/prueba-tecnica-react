@@ -12,7 +12,7 @@ export const Home = () => {
     isLoading,
     error,
     fetchSearchResults,
-    cleanSearchResults
+    cleanSearchResults,
   } = useMoviesdbStore();
 
   const [page, setPage] = useState(movies.page || 1);
@@ -45,7 +45,7 @@ export const Home = () => {
     setSearchQuery("");
     setPage(1);
     cleanSearchResults();
-  }
+  };
 
   // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
   //     setAge(event.target.value as string);
@@ -115,6 +115,10 @@ export const Home = () => {
       <div className="section-spacing space-y-8">
         {!searchActive ? (
           <CarrouselSection />
+        ) : searchResults.results.length === 0 ? (
+          <p className="text-center text-white">
+            No se encontraron resultados
+          </p>
         ) : (
           <ListCards
             titleList="Resultados de la búsqueda"

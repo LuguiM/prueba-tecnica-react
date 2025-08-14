@@ -8,14 +8,16 @@ interface MovieItem {
   original_title?: string;
   first_air_date?: string;
   release_date?: string;
+  media_type?: "movie" | "tv";
 }
 
 interface MoviesCarouselProps {
   results: MovieItem[];
   title?: string;
+  type?: "movie" | "tv";
 }
 
-export const MoviesCarousel = ({ results, title }: MoviesCarouselProps) => {
+export const MoviesCarousel = ({ results, title, type }: MoviesCarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -54,6 +56,7 @@ export const MoviesCarousel = ({ results, title }: MoviesCarouselProps) => {
               year={item.first_air_date || item.release_date}
               size="small"
               item={item}
+              type={item.media_type || type}
             />
           ))}
         </div>
