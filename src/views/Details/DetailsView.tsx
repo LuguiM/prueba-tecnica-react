@@ -11,9 +11,9 @@ export const DetailsView = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { favorites, startAddFavorite } = useFavoritesStore();
+  const { favorites, startAddFavorite, deleteFavorite } = useFavoritesStore();
   const isFavorite = id
-    ? favorites.some((fav) => fav.id === Number(id))
+    ? favorites.some((fav: any) => fav.id === Number(id))
     : false;
 
   const fetchDetails = async () => {
@@ -41,8 +41,13 @@ export const DetailsView = () => {
   }, [type, id]);
 
   const handleFavoriteClick = () => {
-    if (!details) return;
-    startAddFavorite(details);
+    if (!id) return;
+
+    if (isFavorite) {
+      deleteFavorite(Number(id));
+    } else {
+      startAddFavorite(details);
+    }
   };
 
   if (loading)
@@ -61,11 +66,9 @@ export const DetailsView = () => {
         backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`,
       }}
     >
-      {/* Overlay oscuro */}
       <div className="absolute inset-0 bg-black/70"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto py-8 px-4 md:px-8 flex flex-col gap-8">
-        {/* Botón regresar */}
         <div>
           <Button
             variant="outlined"
@@ -73,12 +76,11 @@ export const DetailsView = () => {
             onClick={() => navigate(-1)}
             className="mb-4"
           >
-            ← Volver
+            Volver
           </Button>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Poster */}
           <div className="flex-shrink-0 w-full md:w-1/3">
             <img
               src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
@@ -95,7 +97,6 @@ export const DetailsView = () => {
             </Button>
           </div>
 
-          {/* Información */}
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-bold mb-2">
               {details.title || details.name}
