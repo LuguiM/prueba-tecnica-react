@@ -40,6 +40,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
             {results.map((item: any) => (
               <CardInfo
                 key={item.id}
+                id={item.id}
                 image={item.poster_path}
                 gender="d"
                 title={item.name || item.original_title}

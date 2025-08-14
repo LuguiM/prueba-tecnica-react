@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { Home } from "../views/Home";
+import { Home, DetailsView, FavoritesView } from "../views";
 import { mainLayout } from "../layout/mainLayout";
 
 export const router = createBrowserRouter([
@@ -10,6 +10,19 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: "details/:id",
+                Component: DetailsView  
+            },
+            {
+                path: "favorites",
+                Component: FavoritesView
+            },
+            {
+                //not found
+                path: "*",
+                Component: () => <div>Page not found</div>
             }
         ]
     },

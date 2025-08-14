@@ -28,7 +28,7 @@ export const CardInfo: React.FC<CardInfoProps> = ({
       } group relative`}
     >
       <Link
-        to={`/movie/${id}`}
+        to={`details/${id}`}
         className="block aspect-[2/3] w-full overflow-hidden rounded-lg relative group-hover:scale-105 transition-transform duration-300"
       >
         <img

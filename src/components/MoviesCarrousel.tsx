@@ -47,6 +47,7 @@ export const MoviesCarousel = ({ results, title }: MoviesCarouselProps) => {
           {results?.map((item: any) => (
             <CardInfo
               key={item.id}
+              id={item.id}
               image={item.poster_path}
               gender="d"
               title={item.name || item.original_title}
