@@ -32,6 +32,14 @@ const detailsTv = async (id: string) => {
     return await network('GET', `/tv/${id}`);
 }
 
+const getMoviesGenres = async() => {
+    return await network('GET', '/genre/movie/list');
+}
+
+const getTvGenres = async() => {
+    return await network('GET', '/genre/tv/list');
+}
+
 export default {
     getMovies,
     getSeriesTv,
@@ -40,5 +48,7 @@ export default {
     getAllTrending,
     searchMoviesSeries,
     detailsMovie,
-    detailsTv
+    detailsTv,
+    getMoviesGenres,
+    getTvGenres
 }
