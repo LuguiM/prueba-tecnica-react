@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { moviesSerieSlice } from "./"
+import { favoritesSlice, moviesSerieSlice } from "./"
 
 export const store = configureStore({
     reducer: {
-        moviesSeries: moviesSerieSlice.reducer
+        moviesSeries: moviesSerieSlice.reducer,
+        favorites: favoritesSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck:false,
