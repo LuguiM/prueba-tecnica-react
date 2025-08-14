@@ -69,7 +69,7 @@ const handleCloseSnackbar = (
       } group relative`}
     >
       <Link
-        to={`details/${type}/${id}`}
+        to={`/details/${type}/${id}`}
         className="block aspect-[2/3] w-full overflow-hidden rounded-lg relative group-hover:scale-105 transition-transform duration-300"
       >
         <img
