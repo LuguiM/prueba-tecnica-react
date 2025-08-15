@@ -75,3 +75,7 @@ La aplicación está desplegada en **Vercel** y disponible en el siguiente enlac
 - **Tailwind CSS** → Utilidades para un diseño rápido, flexible y personalizable.
 
 Estas librerías fueron seleccionadas para optimizar el tiempo de desarrollo, mantener un código modular y ofrecer una interfaz atractiva y fluida al usuario.
+
+### Tests Unitarios
+
+En este proyecto no se implementaron tests unitarios, ya que no se posee el conocimiento suficiente para realizarlos correctamente. Se priorizó entregar funcionalidades estables y correctamente integradas. Estoy dispuesto a aprender a realizar tests unitarios para futuros proyectos.
