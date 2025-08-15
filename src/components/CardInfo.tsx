@@ -76,7 +76,7 @@ export const CardInfo: React.FC<CardInfoProps> = ({
       >
         {image === null ? (
           <img
-            src="/public/placeholder-img.jpg" // ruta de tu placeholder
+            src="/placeholder-img.jpg" // ruta de tu placeholder
             alt="Sin imagen disponible"
             className="w-full h-full object-cover block"
           />
