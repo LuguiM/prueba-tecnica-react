@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { CardInfo } from "./CardInfo";
+import { CircularProgress } from "@mui/material";
 
 interface MovieItem {
   id: number;
@@ -15,10 +16,17 @@ interface MoviesCarouselProps {
   results: MovieItem[];
   title?: string;
   type?: "movie" | "tv";
+  loader?: boolean;
 }
 
-export const MoviesCarousel = ({ results, title, type }: MoviesCarouselProps) => {
+export const MoviesCarousel = ({
+  results,
+  title,
+  type,
+  loader = false,
+}: MoviesCarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(loader);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -27,6 +35,16 @@ export const MoviesCarousel = ({ results, title, type }: MoviesCarouselProps) =>
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    if (loader) {
+      setLoading(true);
+      const timer = setTimeout(() => setLoading(false), 2000);
+      return () => clearTimeout(timer);
+    } else {
+      setLoading(false);
+    }
+  }, [results, loader]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -43,22 +61,28 @@ export const MoviesCarousel = ({ results, title, type }: MoviesCarouselProps) =>
         {/* Contenedor */}
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-hide"
+          className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-hide min-h-[200px]"
           style={{ scrollBehavior: "smooth" }}
         >
-          {results?.map((item: any) => (
-            <CardInfo
-              key={item.id}
-              id={item.id}
-              image={item.poster_path}
-              gender={item.genre_ids}
-              title={item.name || item.original_title}
-              year={item.first_air_date || item.release_date}
-              size="small"
-              item={item}
-              type={item.media_type || type}
-            />
-          ))}
+          {loading ? (
+            <div className="flex justify-center items-center w-full">
+              <CircularProgress />
+            </div>
+          ) : (
+            results?.map((item: any) => (
+              <CardInfo
+                key={item.id}
+                id={item.id}
+                image={item.poster_path}
+                gender={item.genre_ids}
+                title={item.name || item.original_title}
+                year={item.first_air_date || item.release_date}
+                size="small"
+                item={item}
+                type={item.media_type || type}
+              />
+            ))
+          )}
         </div>
 
         {/* Botón Derecha */}

@@ -9,12 +9,13 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  CircularProgress,
 } from "@mui/material";
 
 export const Home = () => {
   const {
     movies,
-    genres, // géneros vienen del store
+    genres,
     searchActive,
     searchResults,
     isLoading,
@@ -33,6 +34,7 @@ export const Home = () => {
     year: 0,
   });
   const [inputError, setInputError] = useState(false);
+  const [localLoading, setLocalLoading] = useState(false);
 
   const handleSearch = () => {
     if (!searchQuery.trim()) {
@@ -49,6 +51,7 @@ export const Home = () => {
 
     setPage(1);
     setSearchParams(params);
+    setLocalLoading(true);
   };
 
   const clean = () => {
@@ -74,6 +77,7 @@ export const Home = () => {
     };
 
     setSearchParams(params);
+    setLocalLoading(true); 
   };
 
   useEffect(() => {
@@ -82,7 +86,9 @@ export const Home = () => {
         searchParams.query,
         searchParams.genres,
         searchParams.year
-      );
+      ).finally(() => setLocalLoading(false));
+    } else {
+      setLocalLoading(false);
     }
   }, [searchParams]);
 
@@ -100,6 +106,7 @@ export const Home = () => {
                 setSearchQuery(event.target.value);
                 if (inputError) setInputError(false);
               }}
+              disabled={localLoading}
             />
             {inputError && (
               <p className="text-red-500 text-sm mt-1">
@@ -118,6 +125,7 @@ export const Home = () => {
                 multiple
                 value={selectedGenres}
                 onChange={(e) => setSelectedGenres(e.target.value as number[])}
+                disabled={localLoading}
               >
                 {genres.map((genre: any) => (
                   <MenuItem key={genre.id} value={genre.id}>
@@ -136,6 +144,7 @@ export const Home = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setYear(e.target.value ? Number(e.target.value) : "")
               }
+              disabled={localLoading}
             />
 
             <Button
@@ -143,6 +152,7 @@ export const Home = () => {
               className="rounded-lg mt-2"
               onClick={clean}
               color="secondary"
+              disabled={localLoading}
             >
               Limpiar
             </Button>
@@ -153,14 +163,19 @@ export const Home = () => {
           variant="contained"
           className="rounded-lg mt-2"
           onClick={handleSearch}
+          disabled={localLoading}
         >
-          Buscar
+          {localLoading ? <CircularProgress size={24} /> : "Buscar"}
         </Button>
       </HeaderSection>
 
       <div className="section-spacing space-y-8">
         {!searchActive ? (
           <CarrouselSection />
+        ) : localLoading ? (
+          <div className="flex justify-center items-center min-h-[200px]">
+            <CircularProgress />
+          </div>
         ) : searchResults.results.length === 0 ? (
           <p className="text-center text-white">No se encontraron resultados</p>
         ) : (

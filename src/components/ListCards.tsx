@@ -4,7 +4,7 @@ import { Pagination } from "@mui/material";
 
 interface ListCardsProps {
   titleList?: string;
-  loading?: string;
+  loading?: boolean;
   error?: string;
   results?: Array<any>;
   total_pages?: number;
@@ -44,7 +44,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
       {results && (
         <div className="flex flex-col gap-6">
           <h2 className="text-h6">{titleList}</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 ">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mx-auto md:mx-0">
             {results.map((item: any) => (
               <CardInfo
                 key={item.id}
@@ -53,7 +53,7 @@ export const ListCards: React.FC<ListCardsProps> = ({
                 gender={item.genre_ids}
                 title={item.name || item.original_title}
                 year={item.first_air_date || item.release_date}
-                size="large"
+                size="small"
                 item={item}
                 type={getMediaType(item)}
               />

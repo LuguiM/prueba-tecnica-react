@@ -9,24 +9,27 @@ export const moviesSerieSlice = createSlice({
         searchResults: [],
         trending: [],
         searchActive: false,
-        isLoading: false,
+        isLoading: true,
         error: null,
         genres: [],
     },
     reducers: {
         setMovies: (state, { payload }) => {
-            state.isLoading = false;
             state.movies = payload;
+            state.isLoading = false;
         },
         setSeries: (state, { payload }) => {
             state.series = payload;
+            state.isLoading = false;
         },
         setSearchResults: (state, { payload }) => {
             state.searchActive = true;
             state.searchResults = payload;
+            state.isLoading = false
         },
         setTrending: (state, { payload }) => {
             state.trending = payload;
+            state.isLoading = false;
         },
         setIsLoading: (state, { payload }) => {
             state.isLoading = payload;
@@ -36,10 +39,12 @@ export const moviesSerieSlice = createSlice({
         },
         setGenres: (state, { payload }) => {
             state.genres = payload;
+            state.isLoading = false;
         },
         cleanSearch: (state) => {
             state.searchActive = false;
             state.searchResults = [];
+            state.isLoading = true;
         }
     }
 });

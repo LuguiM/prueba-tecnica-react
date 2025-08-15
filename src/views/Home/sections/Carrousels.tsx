@@ -7,6 +7,7 @@ export const CarrouselSection = () => {
     movies,
     series,
     trending,
+    isLoading,
     startLoadPopularMovies,
     startLoadPopularSeries,
     loadTrending,
@@ -25,16 +26,19 @@ export const CarrouselSection = () => {
       <MoviesCarousel
         title="Tendencias"
         results={trending.results}
+        loader={isLoading}
       ></MoviesCarousel>
       <MoviesCarousel
         title="Peliculas Populares"
         results={movies.results}
         type="movie"
+        loader={isLoading}
       ></MoviesCarousel>
       <MoviesCarousel
         title="Series Populares"
         results={series.results}
         type="tv"
+        loader={isLoading}
       ></MoviesCarousel>
     </>
   );
