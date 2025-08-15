@@ -63,7 +63,9 @@ export const DetailsView = () => {
     <div
       className="min-h-screen bg-cover bg-center relative text-white"
       style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`,
+        backgroundImage: details.backdrop_path
+          ? `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`
+          : `url(/backgroun_img.jpg)`,
       }}
     >
       <div className="absolute inset-0 bg-black/70"></div>
@@ -81,12 +83,29 @@ export const DetailsView = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-shrink-0 w-full md:w-1/3">
+          <div className="flex-shrink-0 w-full md:w-1/3 space-y-4">
             <img
-              src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
-              alt={details.title || details.name}
-              className="rounded-lg shadow-lg"
+              src={
+                details.poster_path
+                  ? `https://image.tmdb.org/t/p/w300${details.poster_path}`
+                  : "/placeholder-img.jpg"
+              }
+              srcSet={
+                details.poster_path
+                  ? `
+                https://image.tmdb.org/t/p/w200${details.poster_path} 200w,
+                https://image.tmdb.org/t/p/w300${details.poster_path} 300w,
+                https://image.tmdb.org/t/p/w500${details.poster_path} 500w,
+                https://image.tmdb.org/t/p/w780${details.poster_path} 780w
+              `
+                  : undefined
+              }
+              sizes="(max-width: 640px) 200px, (max-width: 768px) 300px, (max-width: 1024px) 500px, 780px"
+              alt={details.title || details.name || "Sin imagen disponible"}
+              loading="lazy"
+              className="rounded-lg shadow-lg mx-auto"
             />
+
             <Button
               variant={isFavorite ? "contained" : "outlined"}
               color="primary"

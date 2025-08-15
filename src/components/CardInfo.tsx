@@ -74,11 +74,27 @@ export const CardInfo: React.FC<CardInfoProps> = ({
         to={`/details/${type}/${id}`}
         className="block aspect-[2/3] w-full overflow-hidden rounded-lg relative group-hover:scale-105 transition-transform duration-300"
       >
-        <img
-          src={`https://image.tmdb.org/t/p/w500${image}`}
-          alt={title}
-          className="w-full h-full object-cover block"
-        />
+        {image === null ? (
+          <img
+            src="/public/placeholder-img.jpg" // ruta de tu placeholder
+            alt="Sin imagen disponible"
+            className="w-full h-full object-cover block"
+          />
+        ) : (
+          <img
+            src={`https://image.tmdb.org/t/p/w300${image}`}
+            srcSet={`
+        https://image.tmdb.org/t/p/w200${image} 200w,
+        https://image.tmdb.org/t/p/w300${image} 300w,
+        https://image.tmdb.org/t/p/w500${image} 500w
+      `}
+            sizes="(max-width: 640px) 200px, 300px"
+            alt={title}
+            loading="lazy"
+            className="w-full h-full object-cover block"
+          />
+        )}
+
         <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity"></div>
       </Link>
 

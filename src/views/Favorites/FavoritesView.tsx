@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ListCards } from "../../components";
 import { useFavoritesStore } from "../../hooks";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 const ITEMS_PER_PAGE = 10;
 
 export const FavoritesView = () => {
   const { favorites, isFavoritesLoad, clearFavorites } = useFavoritesStore();
-
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const total_pages = Math.ceil(favorites.length / ITEMS_PER_PAGE);
 
@@ -21,6 +21,22 @@ export const FavoritesView = () => {
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
   );
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [favorites]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div className="section-spacing">
