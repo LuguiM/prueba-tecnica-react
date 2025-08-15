@@ -1,69 +1,77 @@
-# React + TypeScript + Vite
+# 🎬 Cine Archivo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web que permite a los usuarios visualizar y administrar información relacionada con películas y series.  
+Desarrollada con **React** y **Vite**, desplegada en **Vercel**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 API Utilizada
 
-## Expanding the ESLint configuration
+**Nombre:** [The Movie Database (TMDb)](https://www.themoviedb.org/)  
+**Documentación oficial:** [https://developer.themoviedb.org/](https://developer.themoviedb.org/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔑 Cómo obtener el API Key
+1. Crear una cuenta en [TMDb](https://www.themoviedb.org/signup).
+2. Iniciar sesión y dirigirse a la sección **API suscription** desde el perfil.
+3. Solicitar un **API Key**.
+4. Guardar la clave en un archivo `.env` en la raíz del proyecto con la siguiente estructura:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=https://api.themoviedb.org/3
+VITE_API_KEY=tu_api_key_aqui
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🖥️ Instrucciones para correr la app localmente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1️⃣ Clonar el repositorio
 ```
+git clone https://github.com/LuguiM/prueba-tecnica-react.git
+cd prueba-tecnica-react
+```
+
+### 2️⃣ Instalar dependencias
+```
+npm install
+```
+
+### 3️⃣ Configurar variables de entorno
+Crear un archivo **.env** en la raíz del proyecto con el siguiente contenido:
+```
+VITE_API_URL=https://api.themoviedb.org/3
+VITE_API_KEY=tu_api_key_aqui
+```
+
+### 4️⃣ Ejecutar el proyecto
+```
+npm run dev
+```
+La aplicacion se ejecutará en: http://localhost:573
+
+## 🌐 Demo en línea
+La aplicación está desplegada en **Vercel** y disponible en el siguiente enlace:
+
+🔗 https://prueba-tecnica-react-snowy.vercel.app/
+
+## 📷 Capturas de pantalla
+
+### Página principal
+![Página principal](./public/principal.png)
+
+### Detalle de película
+![Detalle de película](./public/detalle.png)
+
+### Búsqueda de películas y series
+![Búsqueda](./public/busqueda.png)
+
+### Favoritos
+![Favoritos](./public/favoritos.png)
+
+
+## 📦 Justificación de librerías externas
+
+- **React Router** → Navegación entre páginas sin recargar el sitio.
+- **Redux Toolkit** → Manejo centralizado y eficiente del estado global.
+- **Material UI** → Componentes preconstruidos con diseño moderno y responsive.
+- **Tailwind CSS** → Utilidades para un diseño rápido, flexible y personalizable.
+
+Estas librerías fueron seleccionadas para optimizar el tiempo de desarrollo, mantener un código modular y ofrecer una interfaz atractiva y fluida al usuario.
