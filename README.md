@@ -55,13 +55,16 @@ La aplicación está desplegada en **Vercel** y disponible en el siguiente enlac
 ## 📷 Capturas de pantalla
 
 ### Página principal
-![Página principal](./screenshots/home.png)
+![Página principal](./public/principal.png)
 
 ### Detalle de película
-![Detalle de película](./screenshots/detail.png)
+![Detalle de película](./public/detalle.png)
 
 ### Búsqueda de películas y series
-![Búsqueda](./screenshots/search.png)
+![Búsqueda](./public/busqueda.png)
+
+### Favoritos
+![Favoritos](./public/favoritos.png)
 
 
 ## 📦 Justificación de librerías externas
