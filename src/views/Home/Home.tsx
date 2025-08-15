@@ -111,7 +111,6 @@ export const Home = () => {
 
         {searchActive && (
           <>
-            {/* Select de géneros dinámico */}
             <FormControl fullWidth className="bg-white rounded-lg mt-2">
               <InputLabel id="genre-select-label">Género</InputLabel>
               <Select
@@ -143,6 +142,7 @@ export const Home = () => {
               variant="contained"
               className="rounded-lg mt-2"
               onClick={clean}
+              color="secondary"
             >
               Limpiar
             </Button>
